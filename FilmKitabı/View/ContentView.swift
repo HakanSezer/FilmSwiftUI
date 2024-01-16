@@ -9,18 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Button {
-            DownloaderClient().filmleriIndir(seach: "titanic") { (sonuc) in
-                switch sonuc {
-                case .success(let filmDizisi):
-                    print(filmDizisi)
-                case .failure(let hata):
-                    print(hata)
-                }
-            }
-        } label: {
-            Text("Test Yap.")
-        }
+        Text("Hata")
 
     }
 }
