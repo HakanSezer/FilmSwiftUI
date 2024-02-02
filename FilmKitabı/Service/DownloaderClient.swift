@@ -12,7 +12,7 @@ class DownloaderClient {
     // İnterneten ilk veriyi çekmek için kullanıyoruz. Bu çekme işlemi ile birlikte eğer çekemezsek @escaping ile film içindne çekeceğimizi ve DownloaderError ile hata göndereceğimizi belirtik.
     func filmleriIndir(seach: String, completion: @escaping (Result<[Film]?, DownloaderError>) -> Void) {
         // Guard let ile eğer hatalıysa gösteriyoruz.
-        guard let url = URL(string: "http://www.omdbapi.com/?i=\(seach)&apikey=b7282265") else {
+        guard let url = URL(string: "http://www.omdbapi.com/?s=\(seach)&apikey=b7282265") else {
             return completion(.failure(.yanlisURL))
         }
         
