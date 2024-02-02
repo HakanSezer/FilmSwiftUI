@@ -11,17 +11,28 @@ struct FilmListeView: View {
     //özlemlenen obje haline getirdik.
     @ObservedObject var filmListeViewModel: FilmListeViewModel
     
+    @State var aranacakFilm = ""
+    
     init() {
         self.filmListeViewModel = FilmListeViewModel()
         self.filmListeViewModel.filmAramasiYap(filmIsmi: "titanic")
     }
     
     var body: some View {
-        List(filmListeViewModel.filmler, id: \.imdbId) { film in
-            HStack {
-                Image("placeholder")
+        NavigationView {
+            TextField("Aranacak Film", text: $aranacakFilm) {
+                //onCommit
+                // bu trimming ve whites ile her alanda arama yapacak, yani boşlukları da görmüş olacak Apiden çekerken.
+                self.filmListeViewModel.filmAramasiYap(filmIsmi:
+                                                        aranacakFilm.trimmingCharacters(in: .whitespacesAndNewlines).addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? aranacakFilm)
             }
             
+            List(filmListeViewModel.filmler, id: \.imdbId) { film in
+                HStack {
+                    Image("placeholder")
+                }
+                
+            }
         }
     }
 }
